@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="https://cloud.typography.com/6638272/7155352/css/fonts.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+[if gte IE 9]><!-->
+    <link rel="stylesheet" href="/css/basicstyles.css" type="text/css" media="all">
+    
+
+   
+   
+
+
+    <!--<![endif]-->
+</head>
+
+
+    <body>
+     <header class="mainheader">
+
+
+        <div class="headingsection">
+            <span>
+                <img src="/images/logo-hbcommunity.png" alt="">
+                </span>
+        </div>
+
+        <div class="menulist">
+
+         <ul>
+             
+             <li> <a style="font-size:20px;" id="logout" class="logout" href="/logout"> Logout </a> <br>
+               <p style="font-size:14px;"> <%= user.username %>  </p></li> 
+              </ul>
+            
+        </div>
+    </header>
+  </body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cloud.typography.com/6638272/7155352/css/fonts.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+[if gte IE 9]><!-->
+    <link rel="stylesheet" href="/css/basicstyles.css" type="text/css" media="all">
+   
+
+   
+</head>
+<body>
+
+ <header class="mainheader">
+        <div class="headingsection">
+            <span>
+                <img src="/images/logo-hbcommunity.png" alt="">
+                </span>
+        </div>
+
+         <div class="menulist">
+            <ul>
+             <li> <a style="font-size:20px" id="logout" class="logout" href="/logout"> Logout </a> <br>
+         </ul>           
+        </div>
+  </header>
+
+    <div class="displayeditresults">
+
+    <ul >  
+    <form  class="editform" method="post">
+       <p class="editform">Edit WishList</p>
+    <% for(var i=0; i<result.length; i++) {%>
+
+          <li class="hidden"><%=result[i]._id%> </li>
+           <li><input class="editform" type="text" name="editwishlisttext" id="editwishlisttext" maxlength="250" 
+           placeholder="<%=result[i].wishlisttext%>" /></li>
+            <li><input  class="editform"type="text" name="editwishlistlink" id="editwishlistlink" maxlength="250" placeholder="<%= result[i].wishlistlink%> "/></li>
+             <li> <input class="editform" type="text" name="editwishlistcomment" id="editwishlistcomment" maxlength="250" placeholder="<%= result[i].wishlistcomment%> " /> </li>
+            
+
+    <% } %> 
+    <li>
+      <button class="editform" type="button" id="savelistbtn" name="savelistbtn" id="savelistbtn" >Save</button>
+       <button  type="button" id="cancellistbtn" name="cancellistbtn" id="cancellistbtn" >Cancel</button>
+</li>
+
+      </form>
+     
+    </ul>
+    </div>
+ <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">
+    </script>
+    <script>
+
+    $(document).ready(function (event) {
+       $('#cancellistbtn').click(function(event){
+        event.preventDefault();
+          console.log("Am i comin in cancel button");
+                window.history.back();
+               // return false;
+           });
+
+   
+
+
+
+       $('#savelistbtn').click(function(event){
+          event.preventDefault();
+          console.log("Am i comin in save button");
+                 var itemid=$('.displayeditresults ul li').first().text();
+                 var wishlisttext = $("#editwishlisttext").val();
+                 var wishlistlink = $("#editwishlistlink").val();
+                 var wishlistcomment=$("#editwishlistcomment").val();
+
+
+                 if(wishlisttext === '' || wishlisttext === 'undefined' || wishlisttext === null)
+                     wishlisttext= $('#editwishlisttext').attr('placeholder').trim();
+                     
+                 if(wishlistlink === '' || wishlistlink === 'undefined' || wishlistlink === null)
+                     wishlistlink= $('#editwishlistlink').attr('placeholder').trim();
+
+                if(wishlistcomment === '' || wishlistcomment === 'undefined' ||  wishlistcomment === null)
+                     wishlistcomment=$('#editwishlistcomment').attr('placeholder').trim();
+             
+                 console.log(wishlisttext + "   " + wishlistlink + "   " + wishlistcomment);
+
+
+                 $.ajax({
+                        url: '/profile/updatewishlist/'+itemid,
+                        cache: false,
+                        type: 'put',
+                        data: {
+            
+                            'wishlisttext': wishlisttext,
+                            'wishlistlink': wishlistlink,
+                            'wishlistcomment':wishlistcomment
+                        },
+                        dataType: 'json',
+                        success: function (response) {  
+                            console.log(response);
+                            if (response.redirectTo && response.msg == 'Just go there please') {
+                                  window.location = '/profile/mywishlist';
+                               
+                              // if (response.redirectTo && response.msg == 'Just go there please') {
+                               //          window.location = '/profile/mywishlist';
+                               //              }
+                                   console.log("success");
+                               }
+                             
+                           
+                        },
+                        error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                                console.log("Status: " , textStatus , "  ",  "Error: " ,  errorThrown); 
+                     }       
+                });
+ 
+           });
+
+   });
+
+    </script>
+</body>
+</html>

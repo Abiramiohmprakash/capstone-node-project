@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head >
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="https://cloud.typography.com/6638272/7155352/css/fonts.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+[if gte IE 9]><!-->
+    <link rel="stylesheet" href="/css/basicstyles.css" type="text/css" media="all">
+   
+
+</head>
+<body >
+
+ <header class="mainheader">
+
+
+       
+        <div class="headingsection">
+            <span>
+                <img src="/images/logo-hbcommunity.png" alt="">
+                </span>
+        </div>
+
+     <div class="menulist">
+        <ul>    
+        <li > <a style="font-size:20px;" id="logout" class="logout" href="/logout"> Logout </a> <br>
+           </li> 
+        </ul>
+    </div>
+
+
+    </header>
+  
+    <button class="wishlistbtn" id="flip">Add Item</button>
+    <div id="panel">
+     <a class="boxclose" id="boxclose"></a>
+        Text Link and Comment
+         <form id="wishlist-form">
+            <ul>
+
+                <li>
+                    
+                    <input type="text" name="wishlisttext" id="wishlisttext" maxlength="250" placeholder="Add a wishlist text" />
+
+                </li>
+                
+
+                <li>
+                  
+                    <input type="text" name="wishlistlink" id="wishlistlink" maxlength="250" placeholder="Add a wishlist link" />
+                </li>
+
+                <li>
+                  
+                    <input type="text" name="wishlistcomment" id="wishlistcomment" maxlength="50" placeholder="Add a wishlist comment" />
+                </li>
+
+
+
+                <!-- <li>
+                    <label for="chkbox">Home Business Owner?</label>
+                    <input type="checkbox" name="chkbox" id="cbox1" value="first_checkbox">
+                </li> -->
+
+                <li>
+                    <button class="addwishlistbtn" id="addwishlistbtn">Add to Wishlist</button>
+                </li>
+
+            </ul>
+        </form>
+
+
+    </div>
+
+   
+    
+   <div class="displayresults">
+    <ul >
+       
+        
+        <% for(var i=0; i<result.length; i++) {%>
+         <div class="displaywishresults">
+          <li class="hidden"><%= result[i]._id %></li>
+          <li ><%= result[i].wishlisttext %> </li>
+          <li> <a target="_blank" href=" + <%= result[i].wishlistlink%> + "><%=result[i].wishlistlink%></a></li>
+          <li><%= result[i].wishlistcomment%></li>
+          <li class="displayeditdelete"> 
+            <p class="edit"><a class="edit"   href="/profile/editwishlist/<%=result[i]._id %>">Edit</a></p>
+            <p class="delete"><a class="delete" href="">Delete</a></p>
+            </li>
+           </div>
+        <% } %> 
+        
+      
+    </ul>
+    </div>
+
+  
+
+          
+
+ <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">
+    </script>
+    <script> 
+$(document).ready(function(){
+     var edititem="";
+   var trIndex = null;
+   $(".displayresults").mouseenter(function(){
+        console.log("Am i coming in this fucntion mouse enter");
+          $(".displayeditdelete").show();
+          });
+
+       // edititem=$('.displayresults ul li').first().text();
+         //edititem=$(this).closest('ul').find('li').first().text();
+
+        //console.log($(this).closest('ul').text());
+
+      //   console.log(edititem);
+       // trIndex = $(this).parent();
+       // console.log(trIndex);
+       // $(trIndex).find('.edit').html('<a class="edit" href="/profile/editwishlist/'+edititem +'">Edit</a>');
+       // $(trIndex).find('.delete').html('<a class="delete" href="">Delete</a>');
+
+$(".displayresults").mouseleave(function () {
+     $(".displayeditdelete").hide();
+          });
+    //$(trIndex).find('.editdelete').html("&nbsp;");
+
+
+
+$(".delete").on('click',function(event){
+     event.preventDefault();
+     //get the item to be deleted
+     console.log("Am i coming in delete function");
+    
+
+     var item=$('.displayresults ul li').first().text();
+
+     //var item=$(this).closest('ul').find('.hidden').text();
+
+
+      var wishlisttext = $("#editwishlisttext").val();
+     console.log(item);
+     console.log(wishlisttext);
+    if(item){
+   $.ajax({
+      type:'DELETE',
+      url:'/profile/mywishlist/' + item,
+      success:function(data){
+       location.reload();
+         }
+       });
+    
+    }
+  });
+/*$(".edit").on('click',function(){
+    console.log("Am i coming in Edit function");
+    var edititem=$('.displayresults ul li').first().text();
+    console.log(edititem);
+     if(edititem !== ''){
+        $.ajax({
+            url: '/profile/editwishlist/'+ edititem,
+            cache: false,
+            dataType: "json",           
+            type: "POST" ,
+            success:function(response){
+                 console.log(response);
+            }
+        });
+     }
+   
+}); */
+/*$(".edit").on('click',function(){
+   console.log("Am i coming in Edit function");
+   var edititem=$('.displayresults ul li').first().text();
+     console.log(edititem);
+       if(edititem !== ''){
+          $.ajax({
+          url: '/profile/editwishlist/'+ edititem,
+          cache: false,
+          dataType: "json",
+               
+          type: "POST" ,
+          success:function (response) {
+         
+            console.log(response);
+            if (response.redirectTo && response.msg == 'Just go there please') {
+                var username="";
+                var dset=response.data;
+                $.each(dset, function (i, items) {
+                     console.log(items.username);
+                     username=items.username;
+                   
+                });
+                var url ='/profile/editwishlist?username='+username
+                 window.location = url;
+                 console.log("success");
+             }
+            }
+          });
+       }
+}); */
+    $("#flip").click(function(){
+        $("#panel").slideToggle();
+    });
+    $('#boxclose').click(function(){
+        $('#panel').fadeOut('fast');   
+    });
+    $("#wishlist-form").submit(function (event) {
+    console.log("All data captured from Login Page");
+    event.preventDefault();
+    var wishlisttext = $("#wishlisttext").val();
+    var wishlistlink = $("#wishlistlink").val();
+    var wishlistcomment=$("#wishlistcomment").val();
+    console.log(wishlisttext + "   " + wishlistlink + "   " + wishlistcomment);
+    $.ajax({
+        url: '/profile/mywishlist',
+        cache: false,
+        type: 'POST',
+        data: {
+            wishlisttext: wishlisttext,
+            wishlistlink: wishlistlink,
+            wishlistcomment:wishlistcomment
+        },
+        dataType: 'json',
+        success: function (response) {
+            if (response.redirectTo && response.msg == 'Just go there please') {
+                window.location = '/profile/mywishlist';
+            }
+            console.log("success");
+        }
+    });
+});
+});
+</script>
+    
+</body>
+</html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -10,221 +10,196 @@
     <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
 [if gte IE 9]><!-->
     <link rel="stylesheet" href="/css/basicstyles.css" type="text/css" media="all">
-    
 
-   
-   
+
+
+
 
 
     <!--<![endif]-->
 </head>
 
 <body>
+
     <body>
-     <header class="mainheader">
+        <header class="mainheader">
 
 
-        <div class="headingsection">
-            <span>
+            <div class="headingsection">
+                <span>
                 <img src="/images/logo-hbcommunity.png" alt="">
                 </span>
+            </div>
+
+            <div class="menulist">
+
+                <ul>
+
+                    <li> <a id="mywishlist" class="mywishlist" href="/profile/mywishlist">  My WishList </a></li>
+
+
+                    <li> <a style="font-size:20px;" id="logout" class="logout" href="/logout"> Logout </a>
+                        <br>
+                        <p style="font-size:14px;">
+                            <%= user.username %>
+                        </p>
+                    </li>
+                </ul>
+
+            </div>
+
+
+        </header>
+
+        <div class="section-inner">
+            <div class="HeroSlider-content">
+
+                <section class="searchsection">
+
+                    <h1>Explore your local home business services</h1>
+                    <div class="searchsection1">
+                        <form class="form-search">
+                            <label for="inputsearch"> </label>
+                            <input class="inputsearch" id="inputsearch" type="text" placeholder=" Enter ZipCode">
+                            <button class="searchbutton" id="search" name="search" value="search">Search</button>
+                        </form>
+                    </div>
+
+                </section>
+
+            </div>
         </div>
 
-        <div class="menulist">
-
-         <ul>
-
-              <li> <a id="mywishlist" class="mywishlist" href="/profile/mywishlist">  My WishList </a></li>
-            
-             
-             <li> <a style="font-size:20px;" id="logout" class="logout" href="/logout"> Logout </a> <br>
-               <p style="font-size:14px;"> <%= user.username %>  </p></li> 
-              </ul>
-            
-        </div>
 
 
-    </header>
+        <table class="table table-striped" id="table">
+            <thead>
+                <tr>
+                    <td>
+                        Category
+                    </td>
+                    <td>
+                        Address
+                    </td>
+                    <td>
+                        Name
+                    </td>
+                    <td>
+                        Relevant Work
+                    </td>
+                    <td>
+                        Email
+                    </td>
+                </tr>
+            </thead>
 
-     <div class="section-inner">
-        <div class="HeroSlider-content">
-
-            <section class="searchsection">
-
-                <h1>Explore your local home business services</h1>
-                <div class="searchsection1">
-                    <form class="form-search" >
-                        <label for="inputsearch"> </label>
-                        <input class="inputsearch" id="inputsearch" type="text" placeholder=" Enter ZipCode">
-                        <button class="searchbutton" id="search" name="search" value="search">Search</button>
-                    </form>
-                </div>
-
-            </section>
-
-        </div>
-    </div>
-
-   
-
-   <table class="table table-striped" id="table">
-                <thead>
-                    <tr>
-                       <td>
-                         Category
-                       </td>
-                        <td>
-                         Address
-                       </td>
-                        <td>
-                         Name
-                       </td>
-                        <td>
-                         Relevant Work
-                       </td>
-                        <td>
-                         Email
-                       </td>
-                       </tr>
-                       </thead>
-      
-   <tbody>
+            <tbody>
 
 
-        <tbody id="tbody">
+                <tbody id="tbody">
                 </tbody>
-   </table>
-
-          
-
-   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">
-    </script>
-    
-    <script >
-$(document).ready(function (event) {
-    $("#table").hide();
-   
-    $(".form-search").submit(function (event) {
-        event.preventDefault();
-        console.log("Am Login formsearch getting called called");
-         $("table").find('tbody').empty();
-        var zipcode = $("#inputsearch").val();
-        // var dropDownSearch = $("#dropdownsearch").val();
-
-        console.log("Zip Code" + zipcode);
-
-        var pagePath = window.location.pathname;
-        console.log("Page Path" + pagePath);
-        
+        </table>
 
 
-        /*marius api call*/
-        
-        var dresult = $.ajax({
-                /* update API end point */
-                url: '/profile/search/',
-                data: {
-                    zipcode: zipcode,     
-                    },
-                cache: false,
-                dataType: "json",
-                /*set the call type GET / POST*/
-                type: "POST"
-            })
-            /* if the call is successful (status 200 OK) show results */
-            .done(function (dresult) {
-                /* if the results are meeningful, we can just console.log them */
-                 console.log(dresult.msg);
-                // console.log(dresult.data);
 
-                if (dresult.redirectTo && dresult.msg == 'Just go there please') {
-                    jQuery.support.cors = true;
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">
+        </script>
+
+        <script>
+            $(document).ready(function (event) {
+                $("#table").hide();
+
+                $(".form-search").submit(function (event) {
+                    event.preventDefault();
+                    console.log("Am Login formsearch getting called called");
+                    $("table").find('tbody').empty();
+                    var zipcode = $("#inputsearch").val();
+                    // var dropDownSearch = $("#dropdownsearch").val();
+
+                    console.log("Zip Code" + zipcode);
+
+                    var pagePath = window.location.pathname;
+                    console.log("Page Path" + pagePath);
 
 
-                    var value='';
-                   
-                   // for (var i = 0; i < dresult.results.size(); i++) {
 
-                       // console.log(dresult[i]);
+                    /*marius api call*/
 
+                    var dresult = $.ajax({
+                            /* update API end point */
+                            url: '/profile/search/',
+                            data: {
+                                zipcode: zipcode,
+                            },
+                            cache: false,
+                            dataType: "json",
+                            /*set the call type GET / POST*/
+                            type: "POST"
+                        })
+                        /* if the call is successful (status 200 OK) show results */
+                        .done(function (dresult) {
+                            /* if the results are meeningful, we can just console.log them */
+                            console.log(dresult.msg);
+                            // console.log(dresult.data);
 
-                   // }
-
-                    // $('.table-responsive').append(dresult);
-                    // window.location = '/';
-                    var results=dresult.data;
-                   
-                    $("#table").show();
-                    var thumb = "/images/emailMe.png";
-                    var tempurl='EmailMe';
-
-                    var trHTML = '';
-                     $.each(results, function (i, items) {
-                        //items1=items;
-                       // items1=items;
-                       //var array=items;
-                       console.log(items);
-                       console.log(items.length); 
+                            if (dresult.redirectTo && dresult.msg == 'Just go there please') {
+                                jQuery.support.cors = true;
 
 
-                            $.each(items, function (key, value) {
-
-                                trHTML += '<tr>';
-                                trHTML += '<td>' + value.category + '</td>';
-                                trHTML += '<td>' + (value.city+ "  " + value.country+ "  " + value.zipcode)+ '</td>';
-                                trHTML += '<td>'+ value.username +'</td>';
-                                trHTML += '<td>' + value.image_url + '</td>';
-                                trHTML += '<td><p> <a href="mailto:" + "'+value.email+'"><img src="/images/emailMe1.png"></img></a> </td>';
-                                trHTML += '</tr>';
-                                  
-                               });
-                      
-  
-                       });
-
-                      $("table").find('tbody').append(trHTML);
-
-                  
+                                var value = '';
 
 
-                     //console.log(itemdata);
-                     //  $.each(itemdata, function (j, dat) {
-                      //  var username=dat.username;
+                                var results = dresult.data;
 
-                      //  console.log(username);
+                                $("#table").show();
+                                var thumb = "/images/emailMe.png";
+                                var tempurl = 'EmailMe';
 
-                        // itemdata=dresult.data[i];    
-                      //  });
+                                var trHTML = '';
+                                $.each(results, function (i, items) {
+
+                                    //console.log(items);
+                                    // console.log(items.length);
 
 
-                      //  console.log(dresult.data[i].zipcode);
-                    //trHTML += '<tr><td>' + val.username + '</td><td>' +val.zipcode + '</td></tr>';
-                    
-                   
-                    //$('#table').append(trHTML);
+                                    $.each(items, function (key, value) {
 
-                   // window.location.href = "/profile";
-                    
-                }
-                /* if the results are not meeningful, it might help to convert them to string first
-                    var displayStringifiedResults = JSON.stringify(result);
-                    console.log(displayStringifiedResults);*/
-            })
-            /* if the call is NOT successful show errors */
-            .fail(function (jqXHR, error, errorThrown) {
-                console.log(jqXHR);
-                console.log(error);
-                console.log(errorThrown);
+                                        trHTML += '<tr>';
+                                        trHTML += '<td>' + value.category + '</td>';
+                                        trHTML += '<td>' + (value.city + "  " + value.country + "  " + value.zipcode) + '</td>';
+                                        trHTML += '<td>' + value.username + '</td>';
+                                        trHTML += '<td>' + value.image_url + '</td>';
+                                        trHTML += '<td><p> <a href="mailto:" + "' + value.email + '"><img src="/images/emailMe1.png"></img></a> </td>';
+                                        trHTML += '</tr>';
+
+                                    });
+
+
+                                });
+
+                                $("table").find('tbody').append(trHTML);
+
+
+
+
+
+
+                            }
+
+                        })
+                        /* if the call is NOT successful show errors */
+                        .fail(function (jqXHR, error, errorThrown) {
+                            console.log(jqXHR);
+                            console.log(error);
+                            console.log(errorThrown);
+                        });
+                });
+
             });
-  });
-
-});
-
-
-
-
-    </script> 
-  
-</body>
+        </script>
+        <footer id="footerprofile">
+            <p> @Sarika Katti <a href="https://github.com/kattisarika" target="_blank">My Github Account</a> , 2017</p>
+        </footer>
+    </body>
 
 </html>

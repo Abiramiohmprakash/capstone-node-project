@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" >
-<head >
+<html lang="en">
+
+<head>
     <meta charset="UTF-8">
     <title>Document</title>
 
@@ -9,59 +10,62 @@
     <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
 [if gte IE 9]><!-->
     <link rel="stylesheet" href="/css/basicstyles.css" type="text/css" media="all">
-   
+
 
 </head>
-<body >
 
- <header class="mainheader">
+<body>
+
+    <header class="mainheader">
 
 
-       
+
         <div class="headingsection">
             <span>
                 <img src="/images/logo-hbcommunity.png" alt="">
                 </span>
         </div>
 
-     <div class="menulist">
-        <ul>    
-           <li > <a style="font-size:20px;" id="goback" class="logout" href="/profile"> Home Page </a> <br>
-           </li> 
+        <div class="menulist">
+            <ul>
+                <li> <a style="font-size:20px;" id="goback" class="logout" href="/profile"> Home Page </a>
+                    <br>
+                </li>
 
-        <li > <a style="font-size:20px;" id="logout" class="logout" href="/logout"> Logout </a> <br>
-           </li> 
-        </ul>
-    </div>
+                <li> <a style="font-size:20px;" id="logout" class="logout" href="/logout"> Logout </a>
+                    <br>
+                </li>
+            </ul>
+        </div>
 
 
     </header>
     <div class="imgpay">
-    <img class="pay" src="/images/scr-shot-payImg.png">
-   
-  
-    <button class="wishlistbtn" id="flip">Add WishList</button>
+        <img class="pay" src="/images/scr-shot-payImg.png">
+
+
+        <button class="wishlistbtn" id="flip">Add WishList</button>
     </div>
     <div id="panel">
-     <a class="boxclose" id="boxclose"></a>
+        <a class="boxclose" id="boxclose"></a>
         Text Link and Comment
-         <form id="wishlist-form">
+        <form id="wishlist-form">
             <ul>
 
                 <li>
-                    
+
                     <input type="text" name="wishlisttext" id="wishlisttext" maxlength="250" placeholder="Add a wishlist text" />
 
                 </li>
-                
+
 
                 <li>
-                  
+
                     <input type="text" name="wishlistlink" id="wishlistlink" maxlength="250" placeholder="Add a wishlist link" />
                 </li>
 
                 <li>
-                  
+
                     <input type="text" name="wishlistcomment" id="wishlistcomment" maxlength="50" placeholder="Add a wishlist comment" />
                 </li>
 
@@ -82,106 +86,119 @@
 
     </div>
 
-   
-    
-   <div class="displayresults">
-    <ul >
-       
-        
-        <% for(var i=0; i<result.length; i++) {%>
-         <div class="displaywishresults">
-          <li class="hidden"><%= result[i]._id %></li>
-          <li ><%= result[i].wishlisttext %> </li>
-          <li> <a target="_blank" href="<%= result[i].wishlistlink%>"><%=result[i].wishlistlink%></a></li>
-          <li><%= result[i].wishlistcomment%></li>
-          <li class="displayeditdelete"> 
-            <p class="edit"><a class="edit"   href="/profile/editwishlist/<%=result[i]._id %> %>">Edit</a></p>
-            <p class="deletep"><a class="delete" href="<%=result[i]._id %>">Delete</a></p>
-            </li>
-           </div>
-        <% } %> 
-        
-      
-    </ul>
+
+
+    <div class="displayresults">
+        <ul>
+
+
+            <% for(var i=0; i<result.length; i++) {%>
+                <div class="displaywishresults">
+                    <li class="hidden">
+                        <%= result[i]._id %>
+                    </li>
+                    <li>
+                        <%= result[i].wishlisttext %>
+                    </li>
+                    <li>
+                        <a target="_blank" href="<%= result[i].wishlistlink%>">
+                            <%=result[i].wishlistlink%>
+                        </a>
+                    </li>
+                    <li>
+                        <%= result[i].wishlistcomment%>
+                    </li>
+                    <li class="displayeditdelete">
+                        <p class="edit"><a class="edit" href="/profile/editwishlist/<%=result[i]._id %> %>">Edit</a></p>
+                        <p class="deletep"><a class="delete" href="<%=result[i]._id %>">Delete</a></p>
+                    </li>
+                </div>
+                <% } %>
+
+
+        </ul>
     </div>
 
-  
 
-          
 
- <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">
+
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">
     </script>
-    <script> 
-$(document).ready(function(){
-     var edititem="";
-   var trIndex = null;
-   $(".displayresults").mouseenter(function(){
-        console.log("Am i coming in this fucntion mouse enter");
-          $(".displayeditdelete").show();
-          });
-
-       
-$(".displayresults").mouseleave(function () {
-     $(".displayeditdelete").hide();
-          });
-    //$(trIndex).find('.editdelete').html("&nbsp;");
+    <script>
+        $(document).ready(function () {
+            var edititem = "";
+            var trIndex = null;
+            $(".displayresults").mouseenter(function () {
+                console.log("Am i coming in this fucntion mouse enter");
+                $(".displayeditdelete").show();
+            });
 
 
+            $(".displayresults").mouseleave(function () {
+                $(".displayeditdelete").hide();
+            });
+            //$(trIndex).find('.editdelete').html("&nbsp;");
 
-$(".delete").on('click',function(event){
-     event.preventDefault();
-     //get the item to be deleted
-     console.log("Am i coming in delete function");
-   
 
-    var item = $(this).attr("href");
-      // console.log(item);
-    
-   if(item){
-   $.ajax({
-      type:'DELETE',
-      url:'/profile/mywishlist/' + item,
-      success:function(data){
-       location.reload();
-         }
-       });
-    
-    }
-  });
 
-    $("#flip").click(function(){
-        $("#panel").slideToggle();
-    });
-    $('#boxclose').click(function(){
-        $('#panel').fadeOut('fast');   
-    });
-    $("#wishlist-form").submit(function (event) {
-    console.log("All data captured from Login Page");
-    event.preventDefault();
-    var wishlisttext = $("#wishlisttext").val();
-    var wishlistlink = $("#wishlistlink").val();
-    var wishlistcomment=$("#wishlistcomment").val();
-   // console.log(wishlisttext + "   " + wishlistlink + "   " + wishlistcomment);
-    $.ajax({
-        url: '/profile/mywishlist',
-        cache: false,
-        type: 'POST',
-        data: {
-            wishlisttext: wishlisttext,
-            wishlistlink: wishlistlink,
-            wishlistcomment:wishlistcomment
-        },
-        dataType: 'json',
-        success: function (response) {
-            if (response.redirectTo && response.msg == 'Just go there please') {
-                window.location = '/profile/mywishlist';
-            }
-            console.log("success");
-        }
-    });
-});
-});
-</script>
-    
+            $(".delete").on('click', function (event) {
+                event.preventDefault();
+                //get the item to be deleted
+                console.log("Am i coming in delete function");
+
+
+                var item = $(this).attr("href");
+                // console.log(item);
+
+                if (item) {
+                    $.ajax({
+                        type: 'DELETE',
+                        url: '/profile/mywishlist/' + item,
+                        success: function (data) {
+                            location.reload();
+                        }
+                    });
+
+                }
+            });
+
+            $("#flip").click(function () {
+                $("#panel").slideToggle();
+            });
+            $('#boxclose').click(function () {
+                $('#panel').fadeOut('fast');
+            });
+            $("#wishlist-form").submit(function (event) {
+                console.log("All data captured from Login Page");
+                event.preventDefault();
+                var wishlisttext = $("#wishlisttext").val();
+                var wishlistlink = $("#wishlistlink").val();
+                var wishlistcomment = $("#wishlistcomment").val();
+                // console.log(wishlisttext + "   " + wishlistlink + "   " + wishlistcomment);
+                $.ajax({
+                    url: '/profile/mywishlist',
+                    cache: false,
+                    type: 'POST',
+                    data: {
+                        wishlisttext: wishlisttext,
+                        wishlistlink: wishlistlink,
+                        wishlistcomment: wishlistcomment
+                    },
+                    dataType: 'json',
+                    success: function (response) {
+                        if (response.redirectTo && response.msg == 'Just go there please') {
+                            window.location = '/profile/mywishlist';
+                        }
+                        console.log("success");
+                    }
+                });
+            });
+        });
+    </script>
+    <footer id="footerprofile">
+        <p> @Sarika Katti <a href="https://github.com/kattisarika" target="_blank">My Github Account</a> , 2017</p>
+    </footer>
 </body>
+
 </html>

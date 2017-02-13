@@ -9,7 +9,7 @@ I have a couple of friends selling saplings, supply food, knit sweaters or stitc
 This app helps first find people with the niche skills who are willing to help others in times of need. 
 
 ##Initial UX and PRD
- The PRD and initial UX are in the below link (capstone-node-project/PRD/CapstoneProjectNodejsExpressApplication.html)
+ The PRD and initial UX are in the below link (https://github.com/kattisarika/capstone-node-project/tree/master/PRD)
 
 
 ##Working Prototype 

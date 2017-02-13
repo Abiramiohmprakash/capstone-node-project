@@ -14,13 +14,13 @@ This app helps first find people with the niche skills who are willing to help o
 ##Initial UX and PRD
  The PRD and initial UX are in the below link (https://github.com/kattisarika/capstone-node-project/tree/master/PRD)
  
- Login Screen (![Screenshot](https://github.com/kattisarika/capstone-node-project/blob/master/prd/images/Login-Page.png))
- Registration (![Screenshot](https://github.com/kattisarika/capstone-node-project/blob/master/prd/images/Register-HBC.png))
- Search     (![Screenshot](https://github.com/kattisarika/capstone-node-project/blob/master/prd/images/Profile-Search.png)) 
- WishList   (![Screenshot](https://github.com/kattisarika/capstone-node-project/blob/master/prd/images/WishList-home.png))
- Edit-Delete WishList (![Screenshot](https://github.com/kattisarika/capstone-node-project/blob/master/prd/images/Edit-Delete-WishList.png))
- Add WishList (![Screenshot] (https://github.com/kattisarika/capstone-node-project/blob/master/prd/images/Add-WishList.png))
- Edit WishList (![Screenshot] (https://github.com/kattisarika/capstone-node-project/blob/master/prd/images/Edit-WishList.png))
+ Login Screen ![Screenshot](https://github.com/kattisarika/capstone-node-project/blob/master/prd/images/Login-Page.png)
+ Registration ![Screenshot](https://github.com/kattisarika/capstone-node-project/blob/master/prd/images/Register-HBC.png)
+ Search     ![Screenshot](https://github.com/kattisarika/capstone-node-project/blob/master/prd/images/Profile-Search.png)
+ WishList   ![Screenshot](https://github.com/kattisarika/capstone-node-project/blob/master/prd/images/WishList-home.png)
+ Edit-Delete WishList ![Screenshot](https://github.com/kattisarika/capstone-node-project/blob/master/prd/images/Edit-Delete-WishList.png)
+ Add WishList ![Screenshot] (https://github.com/kattisarika/capstone-node-project/blob/master/prd/images/Add-WishList.png)
+ Edit WishList ![Screenshot] (https://github.com/kattisarika/capstone-node-project/blob/master/prd/images/Edit-WishList.png)
 
 
 ##Working Prototype 

@@ -174,14 +174,65 @@ $(document).ready(function (event) {
 
 $("#form-registration").submit(function (event) {
     //if the page refreshes when you submit the form use "preventDefault()" to force JavaScript to handle the form submission
-    event.preventDefault();
-
-
-    //get the value from the input box
+     //get the value from the input box
     var user = $("#name").val();
     var email = $("#email").val();
     var pass = $("#password").val();
     var confpassword = $("#confpassword").val();
+    event.preventDefault();
+
+    if(!$("#name").val()){
+       if(user === '' || user.length=== 0){
+          if ($("#name").parent().next(".validation").length == 0) {
+          $("#name").parent().after("<div class='validation' style='color:red;margin-bottom: 20px;'>Please enter username </div>");
+          }
+       }
+   }else {
+            $("#name").parent().next(".validation").remove(); // remove it
+        }
+
+   if(!$("#email").val()){
+       if(email === '' || email.length=== 0){
+          if ($("#email").parent().next(".validation").length == 0) {
+          $("#email").parent().after("<div class='validation' style='color:red;margin-bottom: 20px;'>Please enter email address </div>");
+          }
+       }
+   }else {
+            $("#email").parent().next(".validation").remove(); // remove it
+        }
+
+
+   if(!$("#password").val()){
+       if(pass === '' || pass.length=== 0){
+        if ($("#password").parent().next(".validation").length == 0) {
+          $("#password").parent().after("<div class='validation' style='color:red;margin-bottom: 20px;'>Please enter password</div>");
+         }
+       }
+   }else {
+            $("#password").parent().next(".validation").remove(); // remove it
+        }
+
+
+        if(!$("#confpassword").val()){
+       if(confpassword === '' || confpassword.length=== 0){
+        if ($("#confpassword").parent().next(".validation").length == 0) {
+          $("#confpassword").parent().after("<div class='validation' style='color:red;margin-bottom: 20px;'>Please enter password</div>");
+         }
+       }
+   }else {
+            $("#confpassword").parent().next(".validation").remove(); // remove it
+        }
+
+
+    if($("#password").val() !==  $("#confpassword").val() ){
+       if ($("#confpassword").parent().next(".validation").length == 0) {
+           $("#confpassword").parent().after("<div class='validation' style='color:red;margin-bottom: 20px;'>Passwords dont match</div>");
+         }
+    }else {
+            $("#confpassword").parent().next(".validation").remove(); // remove it
+        }
+
+   
     console.log("All data captured in AJAX" + user + "," + email + "," + password);
     $.post("/register", {
         name: user,
@@ -193,7 +244,7 @@ $("#form-registration").submit(function (event) {
         if (data === 'done') {
             $('.section-inner').empty();
            // $(".registration-successful").show();
-            
+
             $('.section-inner').load('login.html');
             //alert("login success");
         }
@@ -202,9 +253,34 @@ $("#form-registration").submit(function (event) {
 
 $("#form-login").submit(function (event) {
     console.log("All data captured from Login Page");
-    event.preventDefault();
     var username = $("#username").val();
     var pass = $("#password").val();
+
+   if(!$("#username").val()){
+       if(username === '' || username.length=== 0){
+          if ($("#username").parent().next(".validation").length == 0) {
+          $("#username").parent().after("<div class='validation' style='color:red;margin-bottom: 20px;'>Please enter email address</div>");
+          }
+       }
+   }else {
+            $("#username").parent().next(".validation").remove(); // remove it
+        }
+
+
+   if(!$("#password").val()){
+       if(pass === '' || pass.length=== 0){
+        if ($("#password").parent().next(".validation").length == 0) {
+          $("#password").parent().after("<div class='validation' style='color:red;margin-bottom: 20px;'>Please enter password</div>");
+         }
+       }
+   }else {
+            $("#password").parent().next(".validation").remove(); // remove it
+        }
+
+
+
+    event.preventDefault();
+    $("#username").focus();
 
 
     $.ajax({

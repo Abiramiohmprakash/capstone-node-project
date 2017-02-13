@@ -26,6 +26,9 @@
 
      <div class="menulist">
         <ul>    
+           <li > <a style="font-size:20px;" id="goback" class="logout" href="/profile"> Home Page </a> <br>
+           </li> 
+
         <li > <a style="font-size:20px;" id="logout" class="logout" href="/logout"> Logout </a> <br>
            </li> 
         </ul>
@@ -33,8 +36,12 @@
 
 
     </header>
+    <div class="imgpay">
+    <img class="pay" src="/images/scr-shot-payImg.png">
+   
   
-    <button class="wishlistbtn" id="flip">Add Item</button>
+    <button class="wishlistbtn" id="flip">Add WishList</button>
+    </div>
     <div id="panel">
      <a class="boxclose" id="boxclose"></a>
         Text Link and Comment
@@ -85,11 +92,11 @@
          <div class="displaywishresults">
           <li class="hidden"><%= result[i]._id %></li>
           <li ><%= result[i].wishlisttext %> </li>
-          <li> <a target="_blank" href=" + <%= result[i].wishlistlink%> + "><%=result[i].wishlistlink%></a></li>
+          <li> <a target="_blank" href="<%= result[i].wishlistlink%>"><%=result[i].wishlistlink%></a></li>
           <li><%= result[i].wishlistcomment%></li>
           <li class="displayeditdelete"> 
-            <p class="edit"><a class="edit"   href="/profile/editwishlist/<%=result[i]._id %>">Edit</a></p>
-            <p class="delete"><a class="delete" href="">Delete</a></p>
+            <p class="edit"><a class="edit"   href="/profile/editwishlist/<%=result[i]._id %> %>">Edit</a></p>
+            <p class="deletep"><a class="delete" href="<%=result[i]._id %>">Delete</a></p>
             </li>
            </div>
         <% } %> 
@@ -113,17 +120,7 @@ $(document).ready(function(){
           $(".displayeditdelete").show();
           });
 
-       // edititem=$('.displayresults ul li').first().text();
-         //edititem=$(this).closest('ul').find('li').first().text();
-
-        //console.log($(this).closest('ul').text());
-
-      //   console.log(edititem);
-       // trIndex = $(this).parent();
-       // console.log(trIndex);
-       // $(trIndex).find('.edit').html('<a class="edit" href="/profile/editwishlist/'+edititem +'">Edit</a>');
-       // $(trIndex).find('.delete').html('<a class="delete" href="">Delete</a>');
-
+       
 $(".displayresults").mouseleave(function () {
      $(".displayeditdelete").hide();
           });
@@ -135,17 +132,12 @@ $(".delete").on('click',function(event){
      event.preventDefault();
      //get the item to be deleted
      console.log("Am i coming in delete function");
+   
+
+    var item = $(this).attr("href");
+      // console.log(item);
     
-
-     var item=$('.displayresults ul li').first().text();
-
-     //var item=$(this).closest('ul').find('.hidden').text();
-
-
-      var wishlisttext = $("#editwishlisttext").val();
-     console.log(item);
-     console.log(wishlisttext);
-    if(item){
+   if(item){
    $.ajax({
       type:'DELETE',
       url:'/profile/mywishlist/' + item,
@@ -156,53 +148,7 @@ $(".delete").on('click',function(event){
     
     }
   });
-/*$(".edit").on('click',function(){
-    console.log("Am i coming in Edit function");
-    var edititem=$('.displayresults ul li').first().text();
-    console.log(edititem);
-     if(edititem !== ''){
-        $.ajax({
-            url: '/profile/editwishlist/'+ edititem,
-            cache: false,
-            dataType: "json",           
-            type: "POST" ,
-            success:function(response){
-                 console.log(response);
-            }
-        });
-     }
-   
-}); */
-/*$(".edit").on('click',function(){
-   console.log("Am i coming in Edit function");
-   var edititem=$('.displayresults ul li').first().text();
-     console.log(edititem);
-       if(edititem !== ''){
-          $.ajax({
-          url: '/profile/editwishlist/'+ edititem,
-          cache: false,
-          dataType: "json",
-               
-          type: "POST" ,
-          success:function (response) {
-         
-            console.log(response);
-            if (response.redirectTo && response.msg == 'Just go there please') {
-                var username="";
-                var dset=response.data;
-                $.each(dset, function (i, items) {
-                     console.log(items.username);
-                     username=items.username;
-                   
-                });
-                var url ='/profile/editwishlist?username='+username
-                 window.location = url;
-                 console.log("success");
-             }
-            }
-          });
-       }
-}); */
+
     $("#flip").click(function(){
         $("#panel").slideToggle();
     });
@@ -215,7 +161,7 @@ $(".delete").on('click',function(event){
     var wishlisttext = $("#wishlisttext").val();
     var wishlistlink = $("#wishlistlink").val();
     var wishlistcomment=$("#wishlistcomment").val();
-    console.log(wishlisttext + "   " + wishlistlink + "   " + wishlistcomment);
+   // console.log(wishlisttext + "   " + wishlistlink + "   " + wishlistcomment);
     $.ajax({
         url: '/profile/mywishlist',
         cache: false,

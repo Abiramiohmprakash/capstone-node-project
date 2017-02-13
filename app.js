@@ -357,7 +357,7 @@ app.post('/profile/search/', isLoggedIn,function (req, res) {
     //var collection = db.collection('serviceproviderdetails');
     var tableData = [];
     db.collection('serviceproviderdetails').find({'zipcode': req.body.zipcode} ).toArray(function(err, results) {
-       console.log( JSON.stringify(results));
+      // console.log( JSON.stringify(results));
 
        //var items=JSON.stringify(results);
 
@@ -392,7 +392,7 @@ app.post('/register', function (req, res) {
         if (req.body.password !== req.body.confpassword) {
             var err = new Error("passwords do not match");
             err.status = 400;
-            throw err;
+            res.send(err);
         } else {
 
             var newUser = new User({

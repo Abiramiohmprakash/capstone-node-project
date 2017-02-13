@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
 [if gte IE 9]><!-->
-    <link rel="stylesheet" href="/css/basicstyles.css" type="text/css" media="all">
+    <link rel="stylesheet" href="/css/login.css" type="text/css" media="all">
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">
     </script>
@@ -22,20 +22,21 @@
 
 
 <body>
-    <div class="loginclassheader">
-
+   
+      <div id="login">     
+         <h2><span class="fontawesome-lock"></span>Sign In</h2>
         <form id="form-login">
-            <ul>
+          
+            <fieldset>
+            <p>
+                    <label for="username"> UserName :</label></p>
+                <p>    <input type="text" name="username" id="username" maxlength="50" placeholder="username" />
+               </p>
 
-                <li>
-                    <label for="username"> UserName :</label>
-                    <input type="text" name="username" id="username" maxlength="50" placeholder="username" />
-                </li>
-
-                <li>
-                    <label for="password"> Password:</label>
-                    <input type="password" name="password" id="password" maxlength="50" placeholder="password" />
-                </li>
+                <p>
+                    <label for="password"> Password:</label> </p>
+                <p>    <input type="password" name="password" id="password" maxlength="50" placeholder="password" />
+               </p>
 
 
 
@@ -44,15 +45,15 @@
                     <input type="checkbox" name="chkbox" id="cbox1" value="first_checkbox">
                 </li> -->
 
-                <li>
+                <p>
                     <button class="loginbtn" id="login">Login</button>
-                </li>
+                </p>
 
-            </ul>
+           </fieldset>
         </form>
+       </div>
 
 
-    </div>
 
 </body>
 

@@ -17,12 +17,13 @@ User = require('./models/user');
 Splist=require('./models/Splist');
 WishList=require('./models/WishList');
 app.use(methodOverride());
-var moviesJSON=require('./movies.json');
+
 
 app.use(express.static(__dirname + '/public'));
 
+mongoose.connect('mongodb://test:test@ds137759.mlab.com:37759/hbcommunity')
 
-mongoose.connect('mongodb://localhost:27017/hbcommunity');
+//mongoose.connect('mongodb://localhost:27017/hbcommunity');
 var db = mongoose.connection;
 
 app.set('view engine','ejs');
@@ -197,7 +198,7 @@ app.put('/profile/updatewishlist/:id', isLoggedIn,function (req, res) {
       wishlisttext: req.body.wishlisttext,
       wishlistlink: req.body.wishlistlink,
       wishlistcomment: req.body.wishlistcomment},function(err,result){
-        console.log(JSON.stringify(result));
+        //console.log(JSON.stringify(result));
        
          
       if (err) {
